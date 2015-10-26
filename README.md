@@ -47,38 +47,37 @@ For a  thorough beginner-level explanation for pip and Virtualenv, you could che
 
 For Unix-based Operating Systems
 ---
-On Ubuntu, Linux Mint, or other distributions that have `apt-get`, enter the command:
+On Ubuntu, Linux Mint, or other distributions that have `apt-get`, run the command:
 ```
-sudo apt-get install python3-pip
+sudo apt-get install python3.4-venv
 ```
-This will install pip3, a tool that's used to manage packages written in Python.
-
-Then run the command:
-```
-sudo pip3 install virtualenv
-```
-Virtualenv allows us to create Python environments that are isolated from one another. We will now create our own
-virtual environment for a simple web app and install Flask in it.
+This will allow us to create Python environments that are isolated from one another.
 
 Type these on the command line in order to make the virtual environment:
 ```
 mkdir microblog
 cd microblog
-virtualenv venv
+python3 -m venv flask
 ```
 (note: the name microblog can be substituted with anything)
 
-To enter the virtual environment, type:
+To install Flask and other stuff, copy this to the command line:
 ```
-. venv/bin/activate
-```
-Now install Flask:
-```
-sudo pip3 install flask
+flask/bin/pip install flask
+flask/bin/pip install flask-login
+flask/bin/pip install flask-openid
+flask/bin/pip install flask-mail
+flask/bin/pip install flask-sqlalchemy
+flask/bin/pip install sqlalchemy-migrate
+flask/bin/pip install flask-whooshalchemy
+flask/bin/pip install flask-wtf
+flask/bin/pip install flask-babel
+flask/bin/pip install guess_language
+flask/bin/pip install flipflop
+flask/bin/pip install coverage
 ```
 
 And we're done! Let's proceed to our First Web App in Flask!
-
 
 For Windows
 ===
