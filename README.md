@@ -15,7 +15,14 @@ After completing this tutorial, you will be able to:
 
 This guide is based directly from the awesome and concise guides provided by [Flask Documentation](http://flask.pocoo.org/docs/0.10/) and [Miguel Grinberg](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world). These guides have been merged and modified for UP CSI Devcamp 2015.
 
-## Installing Flask
+```
+Guide Outline:
+I. Installing Flask
+  A. Linux Guide
+  B. Windows Guide  
+II. Hello World in Flask
+```
+## I. Installing Flask
 
 To install Flask, we would be needing to 3 things:
 1. Python 3 - a widely used general-purpose, high-level programming language.
@@ -124,7 +131,7 @@ $ pip install Flask
 
 And we're done! Let's proceed to our First Web App in Flask!
 
-## "Hello World" in Flask!
+## II. "Hello World" in Flask!
 
 We now have a venv sub-folder inside your microblog folder that is populated with a Python interpreter and the Flask framework and extensions that we will use for this application.
 
@@ -138,6 +145,7 @@ $ mkdir tmp
 ```
 
 **WHAT ARE THESE FOLDERS**
+
 The `app` folder will be where we will put our application package.
 The `static` sub-folder is where we will store static files like images, javascripts, and cascading style sheets.
 The `templates` sub-folder is obviously where our templates will go.
@@ -156,8 +164,77 @@ The script above simply creates the application object (of class Flask) and then
 If you are wondering why the import statement is at the end and not at the beginning of the script as it is always done, the reason is to avoid circular references, because you are going to see that the views module needs to import the app variable defined in this script. Putting the import at the end avoids the circular import error.
 
 **WHAT ARE VIEWS?**
+
 The views are the handlers that respond to requests from web browsers or other clients. In Flask handlers are written as Python functions. Each view function is mapped to one or more request URLs.
 
 Now let's write our first view function (file `app/views.py`):
 
+```
+from app import app
+
+@app.route('/')
+@app.route('/index')
+def index():
+    return "Hello, World!"
+```
+
+This `view` is actually pretty simple, it just returns a string, to be displayed on the client's web browser. The two `route` decorators above the function create the mappings from URLs `/`` and `/index` to this function.
+
+You might want to check out this (site to learn more about Python Decorators)[https://realpython.com/blog/python/primer-on-python-decorators/]
+
+The final step to have a fully working web application is to create a script that starts up the development web server with our application. Let's call this script `run.py`, and put it in the root folder:
+
+```
+#!flask/bin/python
+from app import app
+app.run(debug=True)
+```
+
+The script simply imports the app variable from our app package and invokes its run method to start the server. Remember that the app variable holds the Flask instance that we created it above.
+
+Before we start the app, let's verify if our directory is correct. It must look like this (except instead of my_app it would be microblog):
+
+![Directory Image](https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xlf1/v/t34.0-12/12177706_1213462125337486_431659876_n.jpg?oh=b28483a4a964e826dd2043a24ae9ccec&oe=562F6F82&__gda__=1446031431_1b570c98a7ae22341ffe082c80def9c0)
+
+**Starting the App**
+
+To start the app you just run this script. On OS X, Linux and Cygwin you have to indicate that this is an executable file before you can run it:
+
+```
+$ chmod a+x run.py
+```
+
+
+Then the script can simply be executed as follows:
+```
+./run.py
+```
+
+On Windows the process is a bit different. There is no need to indicate the file is executable. Instead you have to run the script as an argument to the Python interpreter from the virtual environment:
+
+```
+$ venv\Scripts\python run.py
+```
+
+After the server initializes it will listen on port 5000 waiting for connections. Now open up your web browser and enter the following URL in the address field:
+
+```
+http://localhost:5000
+```
+
+Alternatively you can use the following URL:
+
+```
+http://localhost:5000/index
+```
+
+Do you see the route mappings in action? The first URL maps to /, while the second maps to /index. Both routes are associated with our view function, so they produce the same result. If you enter any other URL you will get an error, since only these two have been defined.
+
+When you are done playing with the server you can just hit Ctrl-C to stop it.
+
+
+
+
+
 ## References
+All thanks to Miguel Grinberg's [Mega-Tutorial Site](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
