@@ -138,6 +138,23 @@ $ venv\scripts\activate
 $ pip install Flask
 ```
 
+Next, do this...
+```
+$ venv\Scripts\pip install flask-login
+$ venv\Scripts\pip install flask-openid
+$ venv\Scripts\pip install flask-mail
+$ venv\Scripts\pip install flask-sqlalchemy
+$ venv\Scripts\pip install sqlalchemy-migrate
+$ venv\Scripts\pip install flask-whooshalchemy
+$ venv\Scripts\pip install flask-wtf
+$ venv\Scripts\pip install flask-babel
+$ venv\Scripts\pip install guess_language
+$ venv\Scripts\pip install flipflop
+$ venv\Scripts\pip install coverage
+```
+
+These commands will download and install all the packages that we will use for our application.
+
 And we're done! Let's proceed to our First Web App in Flask!
 
 ## II. "Hello World" in Flask!
