@@ -17,11 +17,21 @@ This guide is based directly from the awesome and concise guides provided by [Fl
 
 ```
 Guide Outline:
+Foreword
 I. Installing Flask
   A. Linux Guide
   B. Windows Guide  
 II. Hello World in Flask
 ```
+
+## Foreword: Why Flask?
+Why flask? Why study a microframework if I could just study real `frameworks` such as Django? Why should I waste my time learning Flask?
+
+A short, simple answer is that many developers use frameworks such as RoR and Django to develop sites whose functionalities doesn't really need to use such sophisticated, complicated frameworks. Moreover, the learning curve for complete frameworks are logically way steeper than microframeworks. Surely, Flask will be suitable for first-time non-framework developers.
+
+Please read this 2-minute article before starting with Flask. [Check out this link.](http://flask.pocoo.org/docs/0.10/foreword/#what-does-micro-mean):
+
+
 ## I. Installing Flask
 
 To install Flask, we would be needing to 3 things:
@@ -29,8 +39,7 @@ To install Flask, we would be needing to 3 things:
 
 2. pip - a tool that's used to manage packages written in Python
 
-3. Virtual Environment (Virtualenv)- allows us to create Python environments that are isolated from one another. We will now create our own
-virtual environment for a simple web app and install Flask in it.
+3. Virtual Environment (Virtualenv)- allows us to create Python environments that are isolated from one another. We will now create our own virtual environment for a simple web app and install Flask in it.
 
 To learn more about one of the best programming language, check out [Python's Website](https://www.python.org/).
 
@@ -75,12 +84,12 @@ For Windows
 ===
 One main difference between Windows from Unix-based OS is that you need to edit your system environment variables in order to run python in the command prompt.
 
-Luckily, both the (1) system environment variables can already be updated and (2) pip can already be installed during the Python 3.5 installation. In order to accomplish that, you can do the following:
+Luckily, both the (1) system environment variables can already be updated and (2) pip can already be installed during the Python 3.4 installation. In order to accomplish that, you can do the following:
 
-1.) Quick-Guide: Python 3.5 Installation
+1.) Quick-Guide: Python 3.4 Installation
     For a thorough guide, you can click this [link](google.com).
 
-  a. Download python 3.5 [here](https://www.python.org/downloads/).
+  a. Download python 3.4 [here](https://www.python.org/downloads/).
 
   b. Run (as administator) the downloaded exe file.
 
@@ -178,9 +187,9 @@ def index():
     return "Hello, World!"
 ```
 
-This `view` is actually pretty simple, it just returns a string, to be displayed on the client's web browser. The two `route` decorators above the function create the mappings from URLs `/`` and `/index` to this function.
+This `view` is actually pretty simple, it just returns a string, to be displayed on the client's web browser. The two `route` decorators above the function create the mappings from URLs `/` and `/index` to this function.
 
-You might want to check out this (site to learn more about Python Decorators)[https://realpython.com/blog/python/primer-on-python-decorators/]
+You might want to check out this [site to learn more about Python Decorators](https://realpython.com/blog/python/primer-on-python-decorators/)
 
 The final step to have a fully working web application is to create a script that starts up the development web server with our application. Let's call this script `run.py`, and put it in the root folder:
 
