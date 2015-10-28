@@ -27,7 +27,7 @@ II. Hello World in Flask
 ## Foreword: Why Flask?
 Why flask? Why study a microframework if I could just study real `frameworks` such as Django? Why should I waste my time learning Flask?
 
-A short, simple answer is that many developers use frameworks such as RoR and Django to develop sites whose functionalities doesn't really need to use such sophisticated, complicated frameworks. Moreover, the learning curve for complete frameworks are logically way steeper than microframeworks. Surely, Flask will be suitable for first-time non-framework developers.
+A short, simple answer is that many developers use frameworks such as RoR and Django to develop sites whose functionalities doesn't really need to use such sophisticated, complicated frameworks. Why not simplify things o'rayt? Also, the learning curve for complete frameworks are way-way steeper than microframeworks. Surely, Flask is a suitable stepping stone for first-time non-framework developers.
 
 Please read this 2-minute article before starting with Flask. [Check out this link.](http://flask.pocoo.org/docs/0.10/foreword/#what-does-micro-mean):
 
@@ -256,6 +256,40 @@ http://localhost:5000/index
 Do you see the route mappings in action? The first URL maps to /, while the second maps to /index. Both routes are associated with our view function, so they produce the same result. If you enter any other URL you will get an error, since only these two have been defined.
 
 When you are done playing with the server you can just hit Ctrl-C to stop it.
+
+## III. Templates
+
+We have made our webApp running. Now let's try to expand it!
+
+Let's try to combine what we've learned in our previous DevCamp session/s: HTML and Python.
+
+Copy the following in your `views.py` file:
+```
+
+from app import app
+
+@app.route('/')
+@app.route('/index')
+def index():
+    user = {'nickname': 'Toph'}
+    return '''
+<html>
+    <head>
+        <title>Home Page</title>
+    </head>
+    <body>
+        <h1>Hello, ''' + user['nickname'] + '''! Why you so pogi?<h1>
+    </body>
+</html
+'''
+
+```
+
+You should see something like this:
+![SomethinLikeThis](https://scontent-hkg3-1.xx.fbcdn.net/hphotos-xpa1/v/t34.0-12/12179844_1214551965228502_1186999711_n.jpg?oh=1a8ea1c91c74a332edd886450dce86da&oe=56331D34)
+
+So what happened?
+
 
 
 
