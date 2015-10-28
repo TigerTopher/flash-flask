@@ -64,6 +64,10 @@ python3 -m venv flask
 To install Flask and other stuff, copy this to the command line:
 ```
 flask/bin/pip install flask
+```
+
+** THIS IS FOLLOWING IS JUST OPTIONAL IN THE CURRENT SCOPE OF THIS TUTORIAL**
+```
 flask/bin/pip install flask-login
 flask/bin/pip install flask-openid
 flask/bin/pip install flask-mail
@@ -110,6 +114,8 @@ python -m easy_install pip
 ```
   The command above makes use of easy_install, a primitive package manager (same as pip) that is installed automatically when you install python.
 
+  **Note: If you renamed 'python' to 'python3' in your 'Python3' folder in order to accommodate to versions of Python, then you must rename all the commands with the keyword 'python' to 'python3'. Example: `python3 -m easy install pip`**
+
 3.) Installing Virtualenv
 
   In your command line, enter:
@@ -134,23 +140,46 @@ $ venv\scripts\activate
   Either way, you should now be using your virtualenv (notice how the prompt of your shell has changed to show the active environment).
   Now you can just enter the following command to get Flask activated in your virtualenv:
 ```
-$ pip install Flask
+(venv) C:\Users\Cheverloo\my_app> pip install Flask
+```
+
+** THE FOLLOWING IS JUST OPTIONAL IN THE CURRENT SCOPE OF THIS TUTORIAL**
+
+Next, do this...
+```
+(venv) C:\Users\Cheverloo\my_app> pip install flask-login
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install flask-openid
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install flask-mail
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install flask-sqlalchemy
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install sqlalchemy-migrate
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install flask-whooshalchemy
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install flask-wtf
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install flask-babel
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install guess_language
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install flipflop
+(venv) C:\Users\Cheverloo\my_app> $ venv\Scripts\pip install coverage
+```
+
+If you are having error message `Fatal error in launcher: Unable to create process using '"' `, try this:
+```
+(venv) C:\Users\Cheverloo\my_app> python -m pip install Flask
 ```
 
 Next, do this...
 ```
-$ venv\Scripts\pip install flask-login
-$ venv\Scripts\pip install flask-openid
-$ venv\Scripts\pip install flask-mail
-$ venv\Scripts\pip install flask-sqlalchemy
-$ venv\Scripts\pip install sqlalchemy-migrate
-$ venv\Scripts\pip install flask-whooshalchemy
-$ venv\Scripts\pip install flask-wtf
-$ venv\Scripts\pip install flask-babel
-$ venv\Scripts\pip install guess_language
-$ venv\Scripts\pip install flipflop
-$ venv\Scripts\pip install coverage
+(venv) C:\Users\Cheverloo\my_app> python -m pip install flask-login
+(venv) C:\Users\Cheverloo\my_app> python -m pip install flask-openid
+(venv) C:\Users\Cheverloo\my_app> python -m pip install flask-mail
+(venv) C:\Users\Cheverloo\my_app> python -m pip install flask-sqlalchemy
+(venv) C:\Users\Cheverloo\my_app> python -m pip install sqlalchemy-migrate
+(venv) C:\Users\Cheverloo\my_app> python -m pip install flask-whooshalchemy
+(venv) C:\Users\Cheverloo\my_app> python -m pip install flask-wtf
+(venv) C:\Users\Cheverloo\my_app> python -m pip install flask-babel
+(venv) C:\Users\Cheverloo\my_app> python -m pip install guess_language
+(venv) C:\Users\Cheverloo\my_app> python -m pip install flipflop
+(venv) C:\Users\Cheverloo\my_app> python -m pip install coverage
 ```
+
 
 These commands will download and install all the packages that we will use for our application.
 
@@ -221,6 +250,9 @@ Before we start the app, let's verify if our directory is correct. It must look 
 
 ![Directory Image](https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xlf1/v/t34.0-12/12177706_1213462125337486_431659876_n.jpg?oh=b28483a4a964e826dd2043a24ae9ccec&oe=562F6F82&__gda__=1446031431_1b570c98a7ae22341ffe082c80def9c0)
 
+
+**Mistake in the picture: That must be `templates` not template :)**
+
 **Starting the App**
 
 To start the app you just run this script. On OS X, Linux and Cygwin you have to indicate that this is an executable file before you can run it:
@@ -280,17 +312,63 @@ def index():
     <body>
         <h1>Hello, ''' + user['nickname'] + '''! Why you so pogi?<h1>
     </body>
-</html
+</html>
 '''
 
 ```
+So what's happening?
+First, look at the line `user = {'nickname': 'Toph'}`. Here we are creating a variable `user` which is a data structure in Python called a dictionary. Using the key `nickname`, we can access the value `Toph`. We can clearly see that in this line:
+
+`<h1>Hello, ''' + user['nickname'] + '''! Why you so pogi?<h1>`
+
+So what are the `'''`s for? Well, it's an opening and closing tag for our string (this is in Python). So what's happening is that we are returning an html code represented in the concatenation of the three strings.
 
 You should see something like this:
 ![SomethinLikeThis](https://scontent-hkg3-1.xx.fbcdn.net/hphotos-xpa1/v/t34.0-12/12179844_1214551965228502_1186999711_n.jpg?oh=1a8ea1c91c74a332edd886450dce86da&oe=56331D34)
 
-So what happened?
+But. But. But. This is HIDEOUS! It works but this is just fugly. Imagine if you have a more complex HTML code. Just... NO!
+
+Consider how complex the code will become if you have to return a large and complex HTML page with lots of dynamic content. And what if you need to change the layout of your web site in a large app that has dozens of views, each returning HTML directly? This is clearly not a scalable option. - Grinberg
+
+** TEMPLATES TO THE RESCUE SWOOOOOOSH**
 
 
+To solve this, let's try to separate the logic of our application from its layout. This separation is actually common among frameworks. (If you have time, you might want to read about the design pattern [Model-View-Controller](http://c2.com/cgi/wiki?ModelViewController). This is widely implemented in the industry) Templates help implement this separation.
+
+Let's create our first template (file: app/template/index.html):
+```
+<html>
+  <head>
+    <title>{{ title }} - microblog</title>
+  </head>
+  <body>
+      <h1>Hello, {{ user.nickname }}!</h1>
+  </body>
+</html>
+```
+
+As you see above, we just wrote a mostly standard HTML page, with the only difference that there are some placeholders for the dynamic content enclosed in {{ ... }} sections.
+
+Now let's see how we use this template from our view function (file app/views.py):
+
+```
+from flask import render_template
+from app import app
+
+@app.route('/')
+@app.route('/index')
+def index():
+    user = {'nickname': 'Toph'}  # Awesome Guy
+    return render_template('index.html',
+                           title='Home',
+                           user=user)
+```
+
+Try the application at this point to see how the template works. Once you have the rendered page in your browser you may want to view the source HTML and compare it against the original template.
+
+To render the template we had to import a new function from the Flask framework called `render_template`. This function takes a template filename and a variable list of template arguments and returns the rendered template, with all the arguments replaced.
+
+Under the covers, the `render_template` function invokes the Jinja2 templating engine that is part of the Flask framework. Jinja2 substitutes `{{...}}` blocks with the corresponding values provided as template arguments.
 
 
 
