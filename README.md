@@ -143,7 +143,7 @@ $ venv\scripts\activate
 (venv) C:\Users\Cheverloo\my_app> pip install Flask
 ```
 
-** THE FOLLOWING IS JUST OPTIONAL IN THE CURRENT SCOPE OF THIS TUTORIAL**
+  **THE FOLLOWING IS JUST OPTIONAL IN THE CURRENT SCOPE OF THIS TUTORIAL**  
 
 Next, do this...
 ```
@@ -330,7 +330,7 @@ But. But. But. This is HIDEOUS! It works but this is just fugly. Imagine if you 
 
 Consider how complex the code will become if you have to return a large and complex HTML page with lots of dynamic content. And what if you need to change the layout of your web site in a large app that has dozens of views, each returning HTML directly? This is clearly not a scalable option. - Grinberg
 
-** TEMPLATES TO THE RESCUE SWOOOOOOSH**
+**TEMPLATES TO THE RESCUE SWOOOOOOSH**
 
 
 To solve this, let's try to separate the logic of our application from its layout. This separation is actually common among frameworks. (If you have time, you might want to read about the design pattern [Model-View-Controller](http://c2.com/cgi/wiki?ModelViewController). This is widely implemented in the industry) Templates help implement this separation.
