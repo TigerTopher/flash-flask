@@ -335,7 +335,7 @@ Consider how complex the code will become if you have to return a large and comp
 
 To solve this, let's try to separate the logic of our application from its layout. This separation is actually common among frameworks. (If you have time, you might want to read about the design pattern [Model-View-Controller](http://c2.com/cgi/wiki?ModelViewController). This is widely implemented in the industry) Templates help implement this separation.
 
-Let's create our first template (file: app/template/index.html):
+Let's create our first template (file: app/templates/index.html):
 ```
 <html>
   <head>
@@ -369,6 +369,35 @@ Try the application at this point to see how the template works. Once you have t
 To render the template we had to import a new function from the Flask framework called `render_template`. This function takes a template filename and a variable list of template arguments and returns the rendered template, with all the arguments replaced.
 
 Under the covers, the `render_template` function invokes the Jinja2 templating engine that is part of the Flask framework. Jinja2 substitutes `{{...}}` blocks with the corresponding values provided as template arguments.
+
+You might want to check out [Jinja](http://jinja.pocoo.org/), a full featured template engine for Python.
+
+### Control Statements in Templates
+
+Remember control structures? Let's try to apply those `if`s and `else`s!
+The Jinja2 templates support control statements, given inside {%...%} blocks. Let's add an if statement to our template (file app/templates/index.html):
+
+```
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - microblog</title>
+    {% else %}
+    <title>Welcome to microblog</title>
+    {% endif %}
+  </head>
+  <body>
+      <h1>Hello, {{ user.nickname }}!</h1>
+  </body>
+</html>
+```
+
+Here our template is a little smarter. If the variable title has been defined (there's an assigned value), then we print it. If not, we just display `Welcome to microblog`. Try to remove the title argument in the render_template call of our view function to see how the conditional statement works.
+
+
+### Loops in Templates
+
+
 
 
 
