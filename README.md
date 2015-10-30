@@ -10,18 +10,21 @@ In this guide, we’ll cover installing Flask and using it for the first time. F
 
 After completing this tutorial, you will be able to:
 * Set-up Flask in your machines
-* Number 2
+* Create a backend for your web app
 * Implement CRUD operations in Flask
 
 This guide is based directly from the awesome and concise guides provided by [Flask Documentation](http://flask.pocoo.org/docs/0.10/) and [Miguel Grinberg](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world). These guides have been merged and modified for UP CSI Devcamp 2015.
 
-```
-Guide Outline:
+``` Guide Outline:
 Foreword
 I. Installing Flask
   A. Linux Guide
   B. Windows Guide  
 II. Hello World in Flask
+III. Templates
+  A. Control Statements in Templates
+  B. Loops in Templates
+  C. Template Inheritance
 ```
 
 ## Foreword: Why Flask?
@@ -397,8 +400,101 @@ Here our template is a little smarter. If the variable title has been defined (t
 
 ### Loops in Templates
 
+We can also have loops in our template. Let's make an array of "messages" in `views.py` and then using a for loop in our template to show them one by one.
 
 
+(file app/views.py)
+
+```
+from flask import render_template
+from app import app
+
+@app.route('/')
+@app.route('/index')
+def index():
+    user = {'nickname': 'Carl'}
+    posts = [
+                {
+                    'author': {'nickname': 'John'},
+                    'body': 'Lorem ipsum dolor sit amet'
+                },
+                {
+                    'author': {'nickname': 'Carl'},
+                    'body': 'insert random message here'
+                },
+                {
+                    'author': {'nickname': 'Person1'},
+                    'body': 'I like turtles'
+                },
+                {
+                    'author': {'nickname': 'John'},
+                    'body': 'lksadjflknldkjetojeaisldklfbsbnllaksj'
+                }
+            ]
+    return render_template('index.html', title='', user=user, posts=posts)
+```
+
+(file app/templates/index.html)
+
+```
+<html>
+  <head>
+    {% if title %}
+      <title>{{ title }} - microblog</title>
+    {% else %}
+      <title>Welcome to microblog</title>
+    {% endif %}
+  </head>
+  <body>
+    <h1>Hello, {{ user.nickname }}</h1>
+
+    {% for post in posts %}
+    <div>
+      <p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p>
+    </div>
+    {% endfor %}
+  </body>
+</html>
+```
+
+
+This is pretty similar to for loops in python, but keep in mind the `{% endfor %}`.
+
+
+### Template Inheritance
+
+As we add more and more templates to our web app, there will be some parts of the page layout that are common to all files. Instead of copy-pasting them to every html file, let's use Jinja2's template inheritance feature to make a base template that will be added to all our html files. (file app/templates/base.html)
+
+```
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - microblog</title>
+    {% else %}
+    <title>Welcome to microblog</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>Microblog: <a href="/index">Home</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>
+```
+
+Note the new syntax. We will change `index.html` so that it will "inherit" the html code from `base.html`. (file app/templates/index.html)
+
+```
+{% extends "base.html" %}
+{% block content %}
+    <h1>Hi, {{ user.nickname }}!</h1>
+    {% for post in posts %}
+    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+{% endblock %}
+```
+
+So far, we've learned templates and how they interact with Flask. Also, we can now use variables, control statements and loops in html files. Next, we will make a form so users can login to our web app.
 
 
 
