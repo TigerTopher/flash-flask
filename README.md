@@ -15,7 +15,8 @@ After completing this tutorial, you will be able to:
 
 This guide is based directly from the awesome and concise guides provided by [Flask Documentation](http://flask.pocoo.org/docs/0.10/) and [Miguel Grinberg](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world). These guides have been merged and modified for UP CSI Devcamp 2015.
 
-``` Guide Outline:
+```
+Guide Outline:
 Foreword
 I. Installing Flask
   A. Linux Guide
